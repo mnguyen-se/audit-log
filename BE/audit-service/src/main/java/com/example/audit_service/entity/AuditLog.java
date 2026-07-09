@@ -28,13 +28,19 @@ public class AuditLog {
     @Column(nullable = false)
     private String entity;      // vd: AUTH_LOGIN
 
-    @Column(length = 2000)
-    private String detail;      // mo ta them (neu co)
+    private String entityId;    // id của đối tượng bị tác động, vd: id user, id order...
 
-    private String username;    // ai thuc hien hanh dong
+    @Column(length = 2000)
+    private String detail;
+
+    private String username;
+
+    private String userId;      // id của user thực hiện hành động (khác username)
 
     @Column(nullable = false)
-    private Instant receivedAt; // thoi diem consumer nhan duoc message
+    private Instant receivedAt;
+
+    private String sourceService;
 
     @PrePersist
     public void prePersist() {
